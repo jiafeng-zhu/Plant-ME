@@ -12,6 +12,7 @@ export default class CountdownController {
   callback!: () => void
   duration = 0
 
+  // Countdown for 60s
   start(callback: () => void, duration = 60000) {
     this.stop()
 

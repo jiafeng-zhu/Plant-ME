@@ -20,6 +20,7 @@ export default class UIScene extends Phaser.Scene {
   preload() {}
 
   create() {
+    //UI align to the right
     const x = 20
 
     //EnergyUI
@@ -55,7 +56,7 @@ export default class UIScene extends Phaser.Scene {
       .setOrigin(0, 0.5)
 
       //Water Countdown
-    this.waterUI = this.add.text(x + 25, 15, `Water:`, {
+    this.waterUI = this.add.text(x + 25, 15, `Humidity:`, {
       fontFamily: 'Dosis',
       fontSize: '20px',
       color: '#52D5FF',
@@ -66,7 +67,7 @@ export default class UIScene extends Phaser.Scene {
       .setOrigin(0)
       .setScale(0.5)
 
-    const timerLabel = this.add.text(x + 89, 15, `60`, {
+    const timerLabel = this.add.text(x + 107, 15, `60`, {
       fontFamily: 'Dosis',
       fontSize: '20px',
       color: '#52D5FF',

@@ -1,9 +1,15 @@
+
 export default class CharacterSprite extends Phaser.Physics.Arcade.Sprite {
   bodyWidth = 48
   bodyHeight = 48
   size = 20
+  bodyGroup: Phaser.Physics.Arcade.Group
+  frameTime: number = 0
 
-  // bodyGroup
+  UP = 0
+  DOWN = 1
+  LEFT = 2
+  RIGHT = 3
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, 'character')
@@ -20,50 +26,42 @@ export default class CharacterSprite extends Phaser.Physics.Arcade.Sprite {
     // Collides with world
     this.setCollideWorldBounds(true)
 
-    this.createAnims()
-
-    //Body
-    // this.bodyGroup = this.scene.physics.add.group()
-
-    // this.bodyGroup.create(1200, 3840, 'tail').setOrigin(0.5, 0)
-    // this.bodyGroup.create(1200, 3840 + this.size, 'tail').setOrigin(0.5, 0)
-
-    // console.log(this.bodyGroup.getChildren())
-
     // Start animation
-    this.anims.play('character-idle')
+    this.createAnims()
+    this.anims.play('character-idle', true)
+
+    // Body
+    this.bodyGroup = this.scene.physics.add.group()
   }
 
-  public collidesWith(
-    object:
-      | Phaser.GameObjects.GameObject
-      | Phaser.GameObjects.GameObject[]
-      | Phaser.GameObjects.Group
-      | Phaser.GameObjects.Group[],
-  ) {
-    this.scene.physics.add.collider(this, object)
-    // this.scene.physics.add.collider(this.bodyGroup, object)
-    // this.scene.physics.add.collider(this.bodyGroup, this.bodyGroup)
+  // Add body part as game updates
+  protected preUpdate(delta: number): void {
+    this.frameTime += delta
+
+    if (this.frameTime > 35) {
+      this.frameTime = 0
+      // Grow UP
+      this.bodyGroup.create(this.x - 10, this.y, 'tail').setOrigin(0, 0)
+
+    }
+
+    console.log(this.frameTime, this.bodyGroup.getLength())
   }
 
   public moveLeft() {
     this.setVelocity(-160, 0)
-    // this.bodyGroup.setVelocity(-160, 0)
     this.anims.play('character-left', true)
   }
   public moveRight() {
     this.setVelocity(160, 0)
-    // this.bodyGroup.setVelocity(160, 0)
     this.anims.play('character-right', true)
   }
   public moveUp() {
     this.setVelocity(0, -160)
-    // this.bodyGroup.setVelocity(0, -160)
     this.anims.play('character-up', true)
   }
   public moveDown() {
     this.setVelocity(0, 160)
-    // this.bodyGroup.setVelocity(0, 160)
     this.anims.play('character-down', true)
   }
 
@@ -85,7 +83,7 @@ export default class CharacterSprite extends Phaser.Physics.Arcade.Sprite {
         end: 16,
       }),
       frameRate: 5,
-      repeat: -1, //repeat forever
+      repeat: -1,
     })
 
     this.anims.create({
@@ -119,4 +117,35 @@ export default class CharacterSprite extends Phaser.Physics.Arcade.Sprite {
     })
   }
 
+  // faceLeft()
+  //       {
+  //           if (this.direction === UP || this.direction === DOWN)
+  //           {
+  //               this.heading = LEFT;
+  //           }
+  //       },
+
+  // faceRight()
+  //       {
+  //           if (this.direction === UP || this.direction === DOWN)
+  //           {
+  //               this.heading = RIGHT;
+  //           }
+  //       },
+
+  // faceUp()
+  //       {
+  //           if (this.direction === LEFT || this.direction === RIGHT)
+  //           {
+  //               this.heading = UP;
+  //           }
+  //       },
+
+  // faceDown()
+  //       {
+  //           if (this.direction === LEFT || this.direction === RIGHT)
+  //           {
+  //               this.heading = DOWN;
+  //           }
+  //       },
 }

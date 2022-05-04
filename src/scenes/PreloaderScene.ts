@@ -5,9 +5,6 @@ export default class PreloaderScene extends Phaser.Scene {
 
   preload() {
     this.load.image('background', 'assets/img/background.png')
-
-    this.load.image('ground', 'assets/img/Group 9.png')
-
     this.load.image('tail', 'assets/img/tail.png')
 
     //UI
@@ -28,9 +25,8 @@ export default class PreloaderScene extends Phaser.Scene {
     // audio
     this.load.audio('game_bgm', ['assets/audio/game_bgm.mp3'])
 
-    //Tilemap
+    //Tileset & Tilemap
     this.load.image('tiles', 'assets/tiles/plant_u_tileset.png')
-
     this.load.tilemapTiledJSON('plant_u_1', 'assets/tiles/plant_u_1.json')
 
     //Sprites

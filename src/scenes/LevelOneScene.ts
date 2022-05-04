@@ -9,7 +9,6 @@ export default class LevelOneScene extends Phaser.Scene {
   player!: CharacterSprite
   nutrience!: Phaser.Physics.Arcade.Group
   beauty!: Phaser.Physics.Arcade.Group
-  life: number = 0
   gameBgm!: Phaser.Sound.BaseSound
 
   tilesize = 48
@@ -17,10 +16,6 @@ export default class LevelOneScene extends Phaser.Scene {
   worldTileHeight = 80
   worldWidth: number
   worldHeight: number
-
-  // minimap!: Phaser.Cameras.Scene2D.Camera
-  // miniMapWidth = 120
-  // miniMapHight = 140
 
   constructor() {
     super({ key: 'LevelOneScene' })
@@ -36,19 +31,11 @@ export default class LevelOneScene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, this.worldWidth, this.worldHeight)
     this.physics.world.setBounds(0, 0, this.worldWidth, this.worldHeight)
 
-    //Bgm
+    // Bgm
     this.gameBgm = this.sound.add('game_bgm', { volume: 0.3 })
     this.gameBgm.play()
 
-    //miniCamera
-    // this.minimap = this.cameras
-    //   .add(5, 571 - this.miniMapHight, this.miniMapWidth, this.miniMapHight)
-    //   .setZoom(0.2)
-    //   .setName('mini')
-    // this.minimap.setBackgroundColor(0x000000)
-    // this.minimap.scrollX = 1200
-    // this.minimap.scrollY = 3815
-
+    // Background
     this.background = this.add.image(0, 0, 'background').setOrigin(0, 0)
 
     // Tiles
@@ -63,8 +50,11 @@ export default class LevelOneScene extends Phaser.Scene {
     // Player
     this.player = new CharacterSprite(this, 1200, 3790)
 
-    this.player.collidesWith(walls)
-    this.player.collidesWith(platforms)
+    // Set collision
+    // Game over when collision is true
+    this.physics.add.collider(this.player, walls, () => this.gameOver())
+    this.physics.add.collider(this.player, platforms, () => this.gameOver())
+    this.physics.add.collider(this.player, this.player, () => this.gameOver())
 
     // Place the nutrience
     this.nutrience = this.physics.add.group({
@@ -116,7 +106,7 @@ export default class LevelOneScene extends Phaser.Scene {
       this,
     )
 
-    //Keyboard
+    // Keyboard
     this.cursors = this.input.keyboard.createCursorKeys()
 
     // Camera
@@ -151,21 +141,6 @@ export default class LevelOneScene extends Phaser.Scene {
       console.log(this.player.x, this.player.y)
     }
 
-    if (this.life == 1) {
-      this.gameOver()
-    }
-
-    // Add minimap
-    // this.minimap.scrollX = Phaser.Math.Clamp(
-    //   this.player.x - this.miniMapWidth * 0.5,
-    //   240,
-    //   2040,
-    // )
-    // this.minimap.scrollY = Phaser.Math.Clamp(
-    //   this.player.y - this.miniMapHight * 0.5,
-    //   280,
-    //   3420,
-    // )
   }
 
   private collectNutrient(

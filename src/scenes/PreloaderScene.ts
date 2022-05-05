@@ -30,10 +30,12 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('plant_u_1', 'assets/tiles/plant_u_1.json')
 
     //Sprites
-    this.load.spritesheet('character', 'assets/img/me.png', {
-      frameWidth: 48,
-      frameHeight: 48,
-    })
+    // this.load.spritesheet('character', 'assets/img/me.png', {
+    //   frameWidth: 48,
+    //   frameHeight: 55,
+    // })
+
+    this.load.atlas('character', 'assets/img/me.png', 'assets/img/me.json')
 
     this.load.spritesheet('god_of_plants', 'assets/img/god_of_plants.png', {
       frameWidth: 256,

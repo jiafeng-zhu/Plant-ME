@@ -138,7 +138,6 @@ export default class LevelOneScene extends Phaser.Scene {
 
     if (this.cursors.space.isDown) {
       this.player.setVelocity(0, 0)
-      console.log(this.player.x, this.player.y)
     }
 
   }
@@ -147,7 +146,6 @@ export default class LevelOneScene extends Phaser.Scene {
     _player: Phaser.GameObjects.GameObject,
     nutrient: Phaser.GameObjects.GameObject,
   ) {
-    console.log(this.events)
     this.events.emit('nutrientPickedUp')
 
     nutrient.destroy()
@@ -157,7 +155,6 @@ export default class LevelOneScene extends Phaser.Scene {
     _player: Phaser.GameObjects.GameObject,
     beauty: Phaser.GameObjects.GameObject,
   ) {
-    console.log(this.events)
     this.events.emit('beautyPickedUp')
 
     beauty.destroy()

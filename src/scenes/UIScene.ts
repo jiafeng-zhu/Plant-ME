@@ -55,7 +55,7 @@ export default class UIScene extends Phaser.Scene {
       .image(x, 119, 'bar-background')
       .setOrigin(0, 0.5)
 
-      //Water Countdown
+    //Water Countdown
     this.waterUI = this.add.text(x + 25, 15, `Humidity:`, {
       fontFamily: 'Dosis',
       fontSize: '20px',
@@ -87,13 +87,11 @@ export default class UIScene extends Phaser.Scene {
   }
 
   handleCountdownFinished() {
-    this.scene.stop,
-    this.scene.start('GameOverScene')
+    this.scene.stop, this.scene.start('GameOverScene')
   }
 
   update() {
     this.countdown.update()
-
   }
 
   //Action of collect nutrient

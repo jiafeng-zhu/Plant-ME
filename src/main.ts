@@ -1,4 +1,8 @@
 import 'phaser'
+import StartScene from './scenes/StartScene'
+import CreditsScene from './scenes/CreditsScene'
+import CollectionScene from './scenes/CollectionScene'
+import CollectionScene1 from './scenes/CollectionScene_1'
 import LevelOneScene from './scenes/LevelOneScene'
 import PreloaderScene from './scenes/PreloaderScene'
 import UIScene from './scenes/UIScene'
@@ -20,6 +24,10 @@ const config = {
   },
   scene: [
     PreloaderScene,
+    StartScene,
+    CreditsScene,
+    CollectionScene,
+    CollectionScene1,
     LevelOneScene,
     UIScene,
     GameOverScene,

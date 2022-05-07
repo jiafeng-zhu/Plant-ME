@@ -19,12 +19,13 @@ export default class CharacterSprite extends Phaser.Physics.Arcade.Sprite {
     // Collides with world
     this.setCollideWorldBounds(true)
 
+    // Body
+    this.bodyGroup = this.scene.physics.add.group()
+    // this.scene.physics.add.collider(this, this.bodyGroup)
+
     // Start animation
     this.createAnims()
     this.anims.play('character-idle', true)
-
-    // Body
-    this.bodyGroup = this.scene.physics.add.group()
   }
 
   public moveUp() {
@@ -98,7 +99,9 @@ export default class CharacterSprite extends Phaser.Physics.Arcade.Sprite {
 
     if (this.frameTime > 35) {
       this.frameTime = 0
-      this.bodyGroup.create(this.x+0.5, this.y - 7.6, 'tail').setOrigin(0.5, 0)
+      this.bodyGroup
+        .create(this.x + 0.5, this.y - 7.6, 'tail')
+        .setOrigin(0.5, 0)
     }
   }
 }

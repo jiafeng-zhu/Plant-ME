@@ -10,6 +10,7 @@ export default class LevelOneScene extends Phaser.Scene {
   nutrience!: Phaser.Physics.Arcade.Group
   beauty!: Phaser.Physics.Arcade.Group
   gameBgm!: Phaser.Sound.BaseSound
+  hitwall!: Phaser.Sound.BaseSound
 
   tilesize = 48
   worldTileWidth = 50
@@ -32,8 +33,9 @@ export default class LevelOneScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, this.worldWidth, this.worldHeight)
 
     // Bgm
-    this.gameBgm = this.sound.add('game_bgm', { volume: 0.3 })
+    this.gameBgm = this.sound.add('game_bgm', { volume: 0.2 })
     this.gameBgm.play()
+    this.hitwall = this.sound.add('hitwall', { volume: 0.1 })
 
     // Background
     this.background = this.add.image(0, 0, 'background').setOrigin(0, 0)
@@ -115,9 +117,10 @@ export default class LevelOneScene extends Phaser.Scene {
     this.scene.launch('UIScene')
   }
 
+  // Gameover
   public gameOver() {
-    this.player.setVisible(false)
     this.gameBgm.stop()
+    this.hitwall.play()
     this.scene.pause('LevelOneScene')
     this.scene.pause('UIScene')
     this.scene.launch('GameOverScene')
@@ -139,7 +142,6 @@ export default class LevelOneScene extends Phaser.Scene {
     if (this.cursors.space.isDown) {
       this.player.setVelocity(0, 0)
     }
-
   }
 
   private collectNutrient(

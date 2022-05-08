@@ -163,7 +163,12 @@ export default class LevelOneScene extends Phaser.Scene {
 
     // Ending B
     // Check if player takes route B
-    if (this.player.x > 2000 && this.player.y < 200) {
+    // Check if energy < beauty
+    if (
+      this.player.x > 2000 &&
+      this.player.y < 200 &&
+      this.UIScene.energy < this.UIScene.beauty
+    ) {
       this.gameBgm.stop()
       this.scene.stop('LevelOneScene')
       this.scene.stop('UIScene')
@@ -172,11 +177,11 @@ export default class LevelOneScene extends Phaser.Scene {
 
     // Ending C
     // Check if player takes route B
-    // Check if energy > beauty
+    // Check if energy >= beauty
     if (
       this.player.x > 2000 &&
       this.player.y < 200 &&
-      this.UIScene.energy > this.UIScene.beauty
+      this.UIScene.energy >= this.UIScene.beauty
     ) {
       this.gameBgm.stop()
       this.scene.stop('LevelOneScene')

@@ -1,5 +1,4 @@
 export default class GodOfPlantsSprite extends Phaser.Physics.Arcade.Sprite {
-
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, 'god_of_plants')
 
@@ -7,7 +6,7 @@ export default class GodOfPlantsSprite extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this)
 
     this.createAnims()
-    this.anims.play('god_of_plants-sad')
+    this.anims.play('god_of_plants-idle')
   }
 
   private createAnims() {
@@ -52,4 +51,11 @@ export default class GodOfPlantsSprite extends Phaser.Physics.Arcade.Sprite {
     })
   }
 
+  public happy() {
+    this.anims.play('god_of_plants-happy', true)
+  }
+
+  public sad() {
+    this.anims.play('god_of_plants-sad', true)
+  }
 }

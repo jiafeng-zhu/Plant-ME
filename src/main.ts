@@ -7,6 +7,10 @@ import LevelOneScene from './scenes/LevelOneScene'
 import PreloaderScene from './scenes/PreloaderScene'
 import UIScene from './scenes/UIScene'
 import GameOverScene from './scenes/GameOverScene'
+import EndingA from './scenes/Endings/EndingA'
+import EndScene from './scenes/EndScene'
+import EndingB from './scenes/Endings/EndingB'
+import EndingC from './scenes/Endings/EndingC'
 
 const config = {
   type: Phaser.AUTO,
@@ -31,6 +35,10 @@ const config = {
     LevelOneScene,
     UIScene,
     GameOverScene,
+    EndingA,
+    EndingB,
+    EndingC,
+    EndScene,
   ],
 }
 

@@ -4,12 +4,18 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
+    //Backgrounds
     this.load.image('start-background', 'assets/img/start-background.png')
     this.load.image('credits-background', 'assets/img/credits-background.png')
     this.load.image('collection-background', 'assets/img/collection-background.png')
     this.load.image('routes-background', 'assets/img/routes-background.png')
     this.load.image('background', 'assets/img/background.png')
     this.load.image('tail', 'assets/img/tail.png')
+    this.load.image('gameover-background', 'assets/img/gameover-background.png')
+    this.load.image('endingA', 'assets/img/endingA.png')
+    this.load.image('endingB', 'assets/img/endingB.png')
+    this.load.image('endingC', 'assets/img/endingC.png')
+    this.load.image('success-background', 'assets/img/success-background.png')
 
     //UI
     this.load.image('startButton', 'assets/img/UI/startButton.png')
@@ -23,6 +29,13 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('endingButton-hover','assets/img/UI/endingButton-hover.png',)
     this.load.image('routesButton', 'assets/img/UI/routesButton.png')
     this.load.image('routesButton-hover','assets/img/UI/routesButton-hover.png',)
+    this.load.image('retryButton', 'assets/img/UI/retryButton.png')
+    this.load.image('retryButton-hover','assets/img/UI/retryButton-hover.png')
+    this.load.image('nextLevelButton', 'assets/img/UI/nextLevelButton.png')
+    this.load.image('nextLevelButton-hover','assets/img/UI/nextLevelButton-hover.png')
+    this.load.image('nextButton', 'assets/img/UI/nextButton.png')
+    this.load.image('nextButton-hover','assets/img/UI/nextButton-hover.png')
+
 
     this.load.image('energy-icon', 'assets/img/UI/energy-icon.png')
     this.load.image('beauty-icon', 'assets/img/UI/beauty-icon.png')
@@ -42,6 +55,10 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio('start_bgm', ['assets/audio/start_bgm.mp3'])
     this.load.audio('game_bgm', ['assets/audio/game_bgm.mp3'])
     this.load.audio('hitwall', ['assets/audio/hitwall.mp3'])
+    this.load.audio('endingA_bgm', ['assets/audio/endingA_bgm.mp3'])
+    this.load.audio('endingB_bgm', ['assets/audio/endingB_bgm.mp3'])
+    this.load.audio('beauty_bgm', ['assets/audio/beauty_bgm.mp3'])
+    this.load.audio('energy_bgm', ['assets/audio/energy_bgm.mp3'])
 
     //Tileset & Tilemap
     this.load.image('tiles', 'assets/tiles/plant_u_tileset.png')

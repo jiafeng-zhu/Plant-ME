@@ -20,6 +20,9 @@ export default class UIScene extends Phaser.Scene {
   preload() {}
 
   create() {
+    this.energy = 0
+    this.beauty = 0
+
     //UI align to the right
     const x = 20
 
@@ -87,7 +90,8 @@ export default class UIScene extends Phaser.Scene {
   }
 
   handleCountdownFinished() {
-    this.scene.stop, this.scene.start('GameOverScene')
+    this.scene.stop
+    this.scene.launch('GameOverScene')
   }
 
   update() {

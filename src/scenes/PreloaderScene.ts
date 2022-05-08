@@ -41,7 +41,7 @@ export default class PreloaderScene extends Phaser.Scene {
     // audio
     this.load.audio('start_bgm', ['assets/audio/start_bgm.mp3'])
     this.load.audio('game_bgm', ['assets/audio/game_bgm.mp3'])
-     this.load.audio('hitwall', ['assets/audio/hitwall.mp3'])
+    this.load.audio('hitwall', ['assets/audio/hitwall.mp3'])
 
     //Tileset & Tilemap
     this.load.image('tiles', 'assets/tiles/plant_u_tileset.png')
@@ -51,8 +51,12 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.atlas(
       'character',
       'assets/img/me.png',
-      'assets/img/me.json'
-    )
+      'assets/img/me.json')
+
+    this.load.atlas(
+      'sleep',
+      'assets/img/sleep.png',
+      'assets/img/sleep.json')
 
     this.load.spritesheet(
       'god_of_plants',
@@ -62,14 +66,12 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.atlas(
       'nutrient',
       'assets/img/nutrient.png',
-      'assets/img/nutrient.json',
-    )
+      'assets/img/nutrient.json',)
 
     this.load.atlas(
       'beauty',
       'assets/img/beauty.png',
-      'assets/img/beauty.json'
-    )
+      'assets/img/beauty.json')
   }
 
   create() {

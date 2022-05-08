@@ -1,10 +1,12 @@
+import CharacterSprite from '../objects/CharacterSprite'
+import SleepSprite from '../objects/SleepSprite'
 
 export default class StartScene extends Phaser.Scene {
   startbackground!: Phaser.GameObjects.Image
+  sleep!: SleepSprite
   startBgm!: Phaser.Sound.BaseSound
   title!: Phaser.GameObjects.Text
   bgmtest = 0
-
 
   constructor() {
     super('StartScene')
@@ -17,12 +19,14 @@ export default class StartScene extends Phaser.Scene {
       .image(0, 0, 'start-background')
       .setOrigin(0, 0)
 
+    this.sleep = new SleepSprite(this, 236, 471).setOrigin(0)
+
     // Bgm
     this.startBgm = this.sound.add('start_bgm', { volume: 1 })
 
     // Check whether bgm has already been on
     if (this.bgmtest == 0) {
-        this.startBgm.play()
+      this.startBgm.play()
     }
 
     // Title
@@ -76,7 +80,9 @@ export default class StartScene extends Phaser.Scene {
 
     // Credits button
     let creditsButton = this.add.image(218, 403, 'creditsButton').setOrigin(0)
-    let creditsHover = this.add.image(218, 403, 'smallButton-hover').setOrigin(0)
+    let creditsHover = this.add
+      .image(218, 403, 'smallButton-hover')
+      .setOrigin(0)
     creditsHover.setVisible(false)
 
     // Credits button interaction

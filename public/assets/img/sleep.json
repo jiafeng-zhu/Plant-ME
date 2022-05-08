@@ -1,0 +1,61 @@
+{
+	"textures": [
+		{
+			"image": "sleep",
+			"format": "RGBA8888",
+			"size": {
+				"w": 80,
+				"h": 124
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "sleep_1",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 100,
+						"h": 100
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 14,
+						"w": 80,
+						"h": 64
+					},
+					"frame": {
+						"x": 0,
+						"y": 0,
+						"w": 80,
+						"h": 64
+					}
+				},
+				{
+					"filename": "sleep_2",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 100,
+						"h": 100
+					},
+					"spriteSourceSize": {
+						"x": 13,
+						"y": 18,
+						"w": 80,
+						"h": 60
+					},
+					"frame": {
+						"x": 0,
+						"y": 64,
+						"w": 80,
+						"h": 60
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "http://free-tex-packer.com",
+		"version": "0.6.7"
+	}
+}

@@ -1,6 +1,7 @@
 import CharacterSprite from '../objects/CharacterSprite'
 import NutrientSprite from '../objects/NutrientSprite'
 import BeautySprite from '../objects/BeautySprite'
+import UIScene from './UIScene'
 
 export default class LevelOneScene extends Phaser.Scene {
   platforms!: Phaser.Physics.Arcade.StaticGroup
@@ -10,7 +11,10 @@ export default class LevelOneScene extends Phaser.Scene {
   nutrience!: Phaser.Physics.Arcade.Group
   beauty!: Phaser.Physics.Arcade.Group
   gameBgm!: Phaser.Sound.BaseSound
+  beautyBgm!: Phaser.Sound.BaseSound
+  energyBgm!: Phaser.Sound.BaseSound
   hitwall!: Phaser.Sound.BaseSound
+  UIScene!: UIScene
 
   tilesize = 48
   worldTileWidth = 50
@@ -28,6 +32,9 @@ export default class LevelOneScene extends Phaser.Scene {
   preload() {}
 
   create() {
+    // Get scores from UIScene
+    this.UIScene = this.scene.get('UIScene') as UIScene
+
     // Camera
     this.cameras.main.setBounds(0, 0, this.worldWidth, this.worldHeight)
     this.physics.world.setBounds(0, 0, this.worldWidth, this.worldHeight)
@@ -36,6 +43,8 @@ export default class LevelOneScene extends Phaser.Scene {
     this.gameBgm = this.sound.add('game_bgm', { volume: 0.2 })
     this.gameBgm.play()
     this.hitwall = this.sound.add('hitwall', { volume: 0.1 })
+    this.beautyBgm = this.sound.add('beauty_bgm', { volume: 0.1 })
+    this.energyBgm = this.sound.add('energy_bgm', { volume: 0.2 })
 
     // Background
     this.background = this.add.image(0, 0, 'background').setOrigin(0, 0)
@@ -121,8 +130,8 @@ export default class LevelOneScene extends Phaser.Scene {
   public gameOver() {
     this.gameBgm.stop()
     this.hitwall.play()
-    this.scene.pause('LevelOneScene')
-    this.scene.pause('UIScene')
+    this.scene.pause()
+    this.scene.stop('UIScene')
     this.scene.launch('GameOverScene')
   }
 
@@ -142,12 +151,45 @@ export default class LevelOneScene extends Phaser.Scene {
     if (this.cursors.space.isDown) {
       this.player.setVelocity(0, 0)
     }
+
+    // Ending A
+    // Check if player takes route A
+    if (this.player.x < 1248 && this.player.y < 200) {
+      this.gameBgm.stop()
+      this.scene.stop('LevelOneScene')
+      this.scene.stop('UIScene')
+      this.scene.start('EndingA')
+    }
+
+    // Ending B
+    // Check if player takes route B
+    if (this.player.x > 2000 && this.player.y < 200) {
+      this.gameBgm.stop()
+      this.scene.stop('LevelOneScene')
+      this.scene.stop('UIScene')
+      this.scene.start('EndingB')
+    }
+
+    // Ending C
+    // Check if player takes route B
+    // Check if energy > beauty
+    if (
+      this.player.x > 2000 &&
+      this.player.y < 200 &&
+      this.UIScene.energy > this.UIScene.beauty
+    ) {
+      this.gameBgm.stop()
+      this.scene.stop('LevelOneScene')
+      this.scene.stop('UIScene')
+      this.scene.start('EndingC')
+    }
   }
 
   private collectNutrient(
     _player: Phaser.GameObjects.GameObject,
     nutrient: Phaser.GameObjects.GameObject,
   ) {
+    this.energyBgm.play()
     this.events.emit('nutrientPickedUp')
 
     nutrient.destroy()
@@ -157,6 +199,7 @@ export default class LevelOneScene extends Phaser.Scene {
     _player: Phaser.GameObjects.GameObject,
     beauty: Phaser.GameObjects.GameObject,
   ) {
+    this.beautyBgm.play()
     this.events.emit('beautyPickedUp')
 
     beauty.destroy()

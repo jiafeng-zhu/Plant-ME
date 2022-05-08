@@ -75,6 +75,10 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   create() {
+    this.scene.start('CreditsScene')
+    this.scene.start('CollectionScene')
+    this.scene.start('CollectionScene1')
     this.scene.start('StartScene')
+    this.scene.bringToTop('StartScene')
   }
 }

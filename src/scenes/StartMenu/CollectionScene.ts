@@ -1,16 +1,16 @@
 
-export default class CollectionScene_1 extends Phaser.Scene {
+export default class CollectionScene extends Phaser.Scene {
   collectionbackground!: Phaser.GameObjects.Image
 
   constructor() {
-    super('CollectionScene1')
+    super('CollectionScene')
   }
 
   preload() {}
 
   create() {
     this.collectionbackground = this.add
-      .image(0, 0, 'routes-background')
+      .image(0, 0, 'collection-background')
       .setOrigin(0, 0)
 
     // Menu button
@@ -27,29 +27,29 @@ export default class CollectionScene_1 extends Phaser.Scene {
       menuHover.setVisible(false)
     })
     menuButton.on('pointerup', () => {
-      this.scene.start('StartScene')
+      this.scene.bringToTop('StartScene')
     })
 
     // Endings button
     let endingButton = this.add.image(181, 31, 'endingButton').setOrigin(0)
     let endingHover = this.add.image(181, 31, 'endingButton-hover').setOrigin(0)
-    endingHover.setVisible(false)
+    endingHover.setVisible(true)
 
     // Routes button
     let routesButton = this.add.image(323, 31, 'routesButton').setOrigin(0)
     let routesHover = this.add.image(323, 31, 'routesButton-hover').setOrigin(0)
-    routesHover.setVisible(true)
+    routesHover.setVisible(false)
 
-    // Endings button interaction
-    endingButton.setInteractive()
-    endingButton.on('pointerover', () => {
-      endingHover.setVisible(true)
+    // Routes button interaction
+    routesButton.setInteractive()
+    routesButton.on('pointerover', () => {
+      routesHover.setVisible(true)
     })
-    endingButton.on('pointerout', () => {
-      endingHover.setVisible(false)
+    routesButton.on('pointerout', () => {
+      routesHover.setVisible(false)
     })
-    endingButton.on('pointerup', () => {
-      this.scene.start('CollectionScene')
+    routesButton.on('pointerup', () => {
+      this.scene.bringToTop('CollectionScene1')
     })
   }
 }

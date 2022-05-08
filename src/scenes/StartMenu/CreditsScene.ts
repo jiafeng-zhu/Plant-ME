@@ -27,7 +27,7 @@ export default class CreditsScene extends Phaser.Scene {
       menuHover.setVisible(false)
     })
     menuButton.on('pointerup', () => {
-      this.scene.start('StartScene')
+      this.scene.bringToTop('StartScene')
     })
   }
 }

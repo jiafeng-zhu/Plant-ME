@@ -1,4 +1,3 @@
-import CharacterSprite from '../objects/CharacterSprite'
 import SleepSprite from '../objects/SleepSprite'
 
 export default class StartScene extends Phaser.Scene {
@@ -6,7 +5,6 @@ export default class StartScene extends Phaser.Scene {
   sleep!: SleepSprite
   startBgm!: Phaser.Sound.BaseSound
   title!: Phaser.GameObjects.Text
-  bgmtest = 0
 
   constructor() {
     super('StartScene')
@@ -22,12 +20,8 @@ export default class StartScene extends Phaser.Scene {
     this.sleep = new SleepSprite(this, 236, 471).setOrigin(0)
 
     // Bgm
-    this.startBgm = this.sound.add('start_bgm', { volume: 1 })
-
-    // Check whether bgm has already been on
-    if (this.bgmtest == 0) {
-      this.startBgm.play()
-    }
+    this.startBgm = this.sound.add('start_bgm', { volume: 1, loop: true})
+    this.startBgm.play()
 
     // Title
     this.title = this.add
@@ -52,6 +46,10 @@ export default class StartScene extends Phaser.Scene {
       startHover.setVisible(false)
     })
     startButton.on('pointerup', () => {
+      this.scene.stop('CreditsScene')
+      this.scene.stop('CollectionScene')
+      this.scene.stop('CollectionScene1')
+      this.scene.stop('StartScene')
       this.startBgm.stop()
       this.scene.start('LevelOneScene')
     })
@@ -74,8 +72,7 @@ export default class StartScene extends Phaser.Scene {
       collectionHover.setVisible(false)
     })
     collectionButton.on('pointerup', () => {
-      this.bgmtest = 1
-      this.scene.start('CollectionScene')
+      this.scene.bringToTop('CollectionScene')
     })
 
     // Credits button
@@ -94,8 +91,11 @@ export default class StartScene extends Phaser.Scene {
       creditsHover.setVisible(false)
     })
     creditsButton.on('pointerup', () => {
-      this.bgmtest = 1
-      this.scene.start('CreditsScene')
+      this.scene.bringToTop('CreditsScene')
     })
+  }
+
+  update() {
+
   }
 }
